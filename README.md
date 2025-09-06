@@ -16,23 +16,22 @@ A comprehensive data science project that uses machine learning techniques to pr
 House Prices Prediction/
 ├── README.md                           # Project documentation
 ├── requirements.txt                    # Python dependencies
+├── LICENSE                             # MIT License
+├── .gitignore                          # Git ignore file
 ├── data/                              # Data files
 │   ├── raw/                           # Raw data
+│   │   └── housing.csv               # California Housing dataset
 │   └── processed/                     # Processed data
 ├── notebooks/                         # Jupyter notebooks
-│   └── 01_data_exploration.ipynb     # Data exploration
-├── src/                              # Source code
-│   ├── data/                         # Data processing modules
-│   ├── models/                       # Model development
-│   ├── visualization/                # Visualization
-│   └── utils/                        # Utility functions
+│   ├── 01_data_exploration.ipynb     # Data exploration and analysis
+│   └── 02_model_development.ipynb   # Model training and evaluation
 ├── models/                           # Trained models
 │   ├── trained_models/              # Model files
+│   │   ├── housing_model.pkl        # Trained Random Forest model
+│   │   └── label_encoders.pkl      # Label encoders for categorical data
 │   └── model_artifacts/             # Model artifacts
-├── app/                             # Web application
-│   └── streamlit_app.py            # Streamlit application
-├── tests/                           # Test files
-└── docs/                            # Additional documentation
+└── app/                             # Web application
+    └── streamlit_app.py            # Streamlit application (coming soon)
 ```
 
 ## 🚀 Installation
@@ -47,7 +46,7 @@ House Prices Prediction/
 1. **Clone the repository:**
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/bersinada/house-prices-prediction
 cd House Prices Prediction
 ```
 
@@ -69,18 +68,25 @@ pip install -r requirements.txt
 
 ## 📊 Dataset
 
-The project uses a house prices dataset with the following features:
+The project uses the **California Housing Dataset** with the following features:
 
-- **area**: House area (m²)
-- **bedrooms**: Number of bedrooms
-- **bathrooms**: Number of bathrooms
-- **age**: House age
-- **location**: Location (Center, City, Suburb, Rural)
-- **garage**: Garage availability (0/1)
-- **garden**: Garden availability (0/1)
-- **pool**: Pool availability (0/1)
-- **distance_to_city**: Distance to city center (km)
-- **price**: House price (TL) - Target variable
+- **longitude**: Block group longitude
+- **latitude**: Block group latitude
+- **housing_median_age**: Median house age in block group
+- **total_rooms**: Total number of rooms in block group
+- **total_bedrooms**: Total number of bedrooms in block group
+- **population**: Block group population
+- **households**: Number of households in block group
+- **median_income**: Median income in block group
+- **median_house_value**: Median house value ($) - Target variable
+- **ocean_proximity**: Distance from ocean (categorical)
+
+**Dataset Info:**
+
+- **Total samples**: 20,640
+- **Features**: 9 numerical + 1 categorical
+- **Price range**: $14,999 - $500,001
+- **Missing values**: 207 in total_bedrooms (handled)
 
 ## 🔧 Usage
 
@@ -90,10 +96,10 @@ The project uses a house prices dataset with the following features:
 jupyter notebook notebooks/01_data_exploration.ipynb
 ```
 
-### Model Training
+### Model Development
 
 ```bash
-python src/models/model_trainer.py
+jupyter notebook notebooks/02_model_development.ipynb
 ```
 
 ### Web Application
@@ -106,12 +112,21 @@ streamlit run app/streamlit_app.py
 
 Models tested within the project scope:
 
-| Model             | RMSE | R² | MAE |
-| ----------------- | ---- | --- | --- |
-| Linear Regression | -    | -   | -   |
-| Random Forest     | -    | -   | -   |
-| Gradient Boosting | -    | -   | -   |
-| SVR               | -    | -   | -   |
+| Model             | Test R² | Test RMSE | Test MAE | Status |
+| ----------------- | ------- | --------- | -------- | ------ |
+| Random Forest     | 0.8050  | $50,544   | $32,718  | ✅ Best |
+| Gradient Boosting | 0.7781  | $53,928   | $36,963  | ✅ Good |
+| Ridge Regression  | 0.5906  | $73,246   | $51,520  | ⚠️ Fair |
+| Lasso Regression  | 0.5877  | $73,500   | $51,567  | ⚠️ Fair |
+| Linear Regression | 0.5876  | $73,517   | $51,570  | ⚠️ Fair |
+| SVR               | -0.0487 | $117,229  | $87,344  | ❌ Poor |
+
+### 🏆 Best Model: Random Forest
+
+- **Test R²**: 0.8050 (80.5% variance explained)
+- **Test RMSE**: $50,544
+- **Test MAE**: $32,718
+- **Note**: Overfitting detected (Train R²: 0.97, Test R²: 0.81)
 
 ## 🛠️ Technologies
 
@@ -124,4 +139,3 @@ Models tested within the project scope:
 - **Git**: Version control
 
 This project is licensed under the MIT License.
-
