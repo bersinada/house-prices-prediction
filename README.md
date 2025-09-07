@@ -47,7 +47,7 @@ House Prices Prediction/
 
 ```bash
 git clone https://github.com/bersinada/house-prices-prediction
-cd House Prices Prediction
+cd house-prices-prediction
 ```
 
 2. **Create virtual environment:**
@@ -112,14 +112,14 @@ streamlit run app/streamlit_app.py
 
 Models tested within the project scope:
 
-| Model             | Test R² | Test RMSE | Test MAE | Status |
-| ----------------- | ------- | --------- | -------- | ------ |
-| Random Forest     | 0.8050  | $50,544   | $32,718  | ✅ Best |
-| Gradient Boosting | 0.7781  | $53,928   | $36,963  | ✅ Good |
-| Ridge Regression  | 0.5906  | $73,246   | $51,520  | ⚠️ Fair |
-| Lasso Regression  | 0.5877  | $73,500   | $51,567  | ⚠️ Fair |
-| Linear Regression | 0.5876  | $73,517   | $51,570  | ⚠️ Fair |
-| SVR               | -0.0487 | $117,229  | $87,344  | ❌ Poor |
+| Model             | Test R² | Test RMSE           | Test MAE  | Status |
+| ----------------- | -------- | ------------------- | --------- | ------ |
+| Random Forest     | 0.8050   | $50,544   | $32,718 | ✅ Best   |        |
+| Gradient Boosting | 0.7781   | $53,928   | $36,963 | ✅ Good   |        |
+| Ridge Regression  | 0.5906   | $73,246   | $51,520 | ⚠️ Fair |        |
+| Lasso Regression  | 0.5877   | $73,500   | $51,567 | ⚠️ Fair |        |
+| Linear Regression | 0.5876   | $73,517   | $51,570 | ⚠️ Fair |        |
+| SVR               | -0.0487  | $117,229  | $87,344 | ❌ Poor   |        |
 
 ### 🏆 Best Model: Random Forest
 
@@ -139,3 +139,24 @@ Models tested within the project scope:
 - **Git**: Version control
 
 This project is licensed under the MIT License.
+
+## ⚠️ Known Limitations
+
+- Price ceiling at $500,001 in the dataset (965 capped records)
+- Mild overfitting observed (Train R² ≈ 0.97 vs Test R² ≈ 0.81) — acceptable for portfolio scope
+
+## 🤝Acknowledgements
+
+- Dataset: California Housing (derived from the 1990 U.S. Census)
+- Libraries: scikit-learn, pandas, numpy, streamlit, matplotlib, seaborn
+
+## ▶️ Run Locally
+
+```bash
+git clone https://github.com/bersinada/house-prices-prediction
+cd house-prices-prediction
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+streamlit run app/streamlit_app.py
+```
